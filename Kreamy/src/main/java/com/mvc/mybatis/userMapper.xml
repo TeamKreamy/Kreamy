@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.userMapper">
+
+<select id="maxNum" resultType="int">
+	select nvl(max(userNum),0) from userInfo
+</select>
+
+
+<select id="getReadData" parameterType="map" resultType="com.mvc.dto.UserDTO">
+	select userNum,email,pwd from userInfo where email=#{email} and pwd=#{pwd}
+</select>
+
+
+<insert id="insertData" parameterType="com.mvc.dto.UserDTO">
+	insert into board(num,name,pwd,email,subject,content,ipAddr,
+	hitCount,created) values (#{num},#{name},#{pwd},#{email},#{subject},#{content},#{ipAddr},0,sysdate)
+</insert>
+
+<select id="getDataCount" parameterType="map" resultType="int">
+	select nvl(count(*),0) from board
+	where ${searchKey} like '%' || #{searchValue} || '%'
+</select>
+
+
+</mapper>

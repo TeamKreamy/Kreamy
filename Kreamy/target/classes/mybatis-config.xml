@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+<!-- Spring 에서는 생략 -->
+<properties>
+	<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+	<property name="url" value="jdbc:oracle:thin:@localhost:1521:TestDB"/>
+	<property name="username" value="kreamy"/>
+	<property name="password" value="a123"/>
+</properties>
+
+<!-- 다양한...db를 사용하면.... 여기다가 선언해줘서 사용하는듯....spring은 app-context에 자체적으로 연결할때 사용할수잇어서 스프링의
+다른 프레임워크와 연동해서 사용할때는 위에를 읽어들인다 -->
+
+<environments default="development">
+	<environment id="development">
+		<transactionManager type="JDBC"/>
+		<dataSource type="POOLED">
+			<property name="driver" value="${driver"/>
+			<property name="url" value="${url"/>
+			<property name="username" value="${username"/>
+			<property name="password" value="${password"/>
+		</dataSource>
+	</environment>
+</environments>
+
+<mappers>
+	<mapper resource="com/mvc/mybatis/userMapper.xml"/>
+</mappers>
+
+
+
+</configuration>
