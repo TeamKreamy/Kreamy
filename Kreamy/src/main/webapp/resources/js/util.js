@@ -24,13 +24,25 @@ function isValidKorean(data){
 //비밀번호 검사
 function isValidPassword(str){
 	
-	var format = /^.*(?=.{8,16})(?=.*[0-9])(?=.*[a-zA-Z]).*$/;
-	if(!format.test(str)){
+	var pw = str;
+	var num = pw.search(/[0-9]/g);
+	var eng = pw.search(/[a-z]/ig);
+	var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
+
+	if(pw.length < 8 || pw.length > 20){
 		return false;
 	}
+	
+	if(pw.search(/₩s/) != -1){
+		return false;
+	}
+	
+	if(num < 0 || eng < 0 || spe < 0 ){
+		return false;
+	}
+
 	return true;
 }
-
 
 // 날짜 검사
 function isValidDate(year, month, day) {

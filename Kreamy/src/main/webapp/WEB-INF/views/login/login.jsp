@@ -19,51 +19,60 @@
 <script type="text/javascript">
 
 $(function() {
-	$('.input_box').on('input', checkInput);
+	$('.e_input_box').on('input', checkEInput);
+	$('.p_input_box').on('input', checkPInput);
+	
+	
 });
 
-function checkInput() {
+function checkEInput() {
 	
 	var email = $('input[name=email]').val();
 	var pwd = $('input[name=pwd]').val();
 	
-	var e_title = $('.e_input_title');
-	var e_txt = $('.e_input_txt');
-	var e_error = $('.e_input_error');
-	
-	var p_title = $('.input_title');
-	var p_txt = $('.input_txt');
-	var p_error = $('.input_error');
-	
 	if(!isValidEmail(email)) {
-		e_title.addClass('has_error');
-		e_txt.addClass('has_error');
-		e_error.addClass('has_error');
+		jQuery('.e_input_error').show();
+		$(".e_input_title").attr('class','e_input_title_has_error');
+		$(".e_input_txt").attr('class','e_input_txt_has_error');
+		$(".e_input_error").attr('class','e_input_error_has_error');
 	} else{
-		e_title.removeClass('has_error');
-		e_txt.removeClass('has_error');
-		e_error.removeClass('has_error');
+		$(".e_input_title_has_error").attr('class','e_input_title');
+		$(".e_input_txt_has_error").attr('class','e_input_txt');
+		$(".e_input_error_has_error").attr('class','e_input_error');
+		jQuery('.e_input_error').hide();
 	}
 
+}
+
+function checkPInput() {
+	
+	var email = $('input[name=email]').val();
+	var pwd = $('input[name=pwd]').val();
+	
 	if(!isValidPassword(pwd)) {
-		alert(pwd);
-		p_title.addClass('has_error');
-		p_txt.addClass('has_error');
-		p_error.addClass('has_error');
+		jQuery('.p_input_error').show();
+		$(".p_input_title").attr('class','p_input_title_has_error');
+		$(".p_input_txt").attr('class','p_input_txt_has_error');
+		$(".p_input_error").attr('class','p_input_error_has_error');
 	} else{
-		alert(pwd);
-		p_title.removeClass('has_error');
-		p_txt.removeClass('has_error');
-		p_error.removeClass('has_error');
+		$(".p_input_title_has_error").attr('class','p_input_title');
+		$(".p_input_txt_has_error").attr('class','p_input_txt');
+		$(".p_input_error_has_error").attr('class','p_input_error');
+		jQuery('.p_input_error').hide();
 	}
 	
+}
+
+function init(){
+	jQuery('.e_input_error').hide();
+	jQuery('.p_input_error').hide();
 }
 
 </script>
 
 
 </head>
-<body>
+<body onload="init();">
 
 <form id="login_form" method="post" action="<%=cp %>/login_ok">
 
@@ -73,7 +82,7 @@ function checkInput() {
 		::before
 	</h2>
 	
-	<div class="input_box">
+	<div class="e_input_box">
 		<h3 class="e_input_title">이메일 주소</h3>
 		<div class="input_item">
 			<input type="text" name="email" value="" placeholder="예) kream@kream.co.kr" autocomplete="off" class="e_input_txt"/>
@@ -81,7 +90,7 @@ function checkInput() {
 		<p class="e_input_error">이메일 주소를 정확히 입력해주세요.</p>
 	</div>
 	
-	<div class="input_box">
+	<div class="p_input_box">
 		<h3 class="p_input_title">비밀번호</h3>
 		<div class="input_item">
 			<input type="password" name="pwd" value="" placeholder autocomplete="off" class="p_input_txt"/>

@@ -116,73 +116,192 @@ a {
 }
 
 .e_input_title {
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     font-size: 13px;
     letter-spacing: -.07px;
     line-height: 18px;
 }
 
 .e_input_txt {
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
     padding: 8px 0;
     width: 100%;
     font-size: 15px;
     letter-spacing: -.15px;
     line-height: 22px;
     border-bottom: 1px solid #ebebeb;
+    padding-right: 30px;
+    height: 38px;
 }
 .e_input_box {
     position: relative;
     padding: 10px 0 14px;
 }
+.p_input_box {
+    position: relative;
+    padding: 10px 0 14px;
+}
 
 .p_input_title {
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     font-size: 13px;
     letter-spacing: -.07px;
     line-height: 18px;
 }
 
 .p_input_txt {
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
     padding: 8px 0;
     width: 100%;
     font-size: 15px;
     letter-spacing: -.15px;
     line-height: 22px;
     border-bottom: 1px solid #ebebeb;
+    padding-right: 30px;
+    height: 38px;
 }
 
 .p_input_item {
     position: relative;
 }
 
-.input_error {
-    display: none;
+
+.e_input_title_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+    color: #f15746;
 }
 
-.e_input_title .has_error {
-    color: #f15746;
-}
-.e_input_txt .has_error {
+.e_input_txt_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
     border-bottom-color: #ef6253;
+    padding-right: 30px;
+    height: 38px;
 }
-.e_input_error .has_error {
+
+.e_input_error_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     display: block;
     position: absolute;
     line-height: 16px;
     font-size: 11px;
     color: #f15746;
 }
-.p_input_title .has_error {
+.p_input_title_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
     color: #f15746;
 }
-.p_input_txt .has_error {
+
+.p_input_txt_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
     border-bottom-color: #ef6253;
+    padding-right: 30px;
+    height: 38px;
 }
-.p_input_error .has_error {
+
+.p_input_error_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     display: block;
     position: absolute;
     line-height: 16px;
     font-size: 11px;
     color: #f15746;
 }
+
+
 *, :after, :before {
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
