@@ -52,15 +52,16 @@ a {
     padding-top: 45px;
 }
 
-.btn {
+.btn_disabled {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    text-decoration: none;
     display: inline-block;
-    cursor: pointer;
     vertical-align: middle;
     text-align: center;
-    background-color: #fff;
-}
-
-.full {
     width: 100%;
     font-size: 16px;
     letter-spacing: -.16px;
@@ -68,17 +69,57 @@ a {
     height: 52px;
     line-height: 50px;
     border-radius: 12px;
+    background-color: #ebebeb;
+    color: #fff;
+    cursor: default;
+    pointer-events: none;
 }
 
-.solid {
+
+.btn {
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: -.16px;
+    font-weight: 700;
+    height: 52px;
+    line-height: 50px;
+    border-radius: 12px;
     background-color: #222;
     color: #fff;
 }
 
-.solid.disabled, .solid:disabled {
-    background-color: #ebebeb;
+.btn_naver {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: -.16px;
+    font-weight: 700;
+    height: 52px;
+    line-height: 50px;
+    border-radius: 12px;
     color: #fff;
-    cursor: default;
+    margin-top: 8px;
+    position: relative;
+    background-color: #5ac451;
 }
 
 .look_box {
@@ -115,6 +156,52 @@ a {
     padding: 10px 0 14px;
 }
 
+.eunder_input_txt {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+    padding-right: 30px;
+    height: 38px;
+	border-bottom-color: black;
+}
+.punder_input_txt {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+    padding-right: 30px;
+    height: 38px;
+	border-bottom-color: black;
+}
 .e_input_title {
     -webkit-text-size-adjust: none;
     -webkit-font-smoothing: antialiased;

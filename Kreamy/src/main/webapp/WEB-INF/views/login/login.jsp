@@ -10,7 +10,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>로그인</title>
-
+<link data-n-head="ssr" rel="icon" type="image/x-icon" href="https://kream.co.kr/favicon.ico">
 <link rel="stylesheet" type="text/css" href="/kreamy/resources/css/login.css"/>
 
 <script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
@@ -22,6 +22,77 @@ $(function() {
 	$('.e_input_box').on('input', checkEInput);
 	$('.p_input_box').on('input', checkPInput);
 	
+	$('.p_input_box').on('input', function(){
+		
+		var email = $('input[name=email]').val();
+		var pwd = $('input[name=pwd]').val();
+		
+		if(isValidEmail(email)==true && isValidPassword(pwd)==true){
+			$(".btn_disabled").attr('class','btn');
+		}else{
+			$(".btn").attr('class','btn_disabled');
+		}
+	});
+	
+	$('input[name=email]').focus(function(){
+		
+		var email = $('input[name=email]').val();
+		var pwd = $('input[name=pwd]').val();
+		
+		if(email.length == 0){
+			$('.e_input_txt').attr('class','eunder_input_txt');
+		}else if(isValidEmail(email)==true){
+			$('.e_input_txt').attr('class','eunder_input_txt');
+		}else{
+			$('.eunder_input_txt').attr('class','e_input_txt_has_error');
+		}
+		
+	});
+
+	$('input[name=email]').blur(function(){
+
+		var email = $('input[name=email]').val();
+		var pwd = $('input[name=pwd]').val();
+		
+		if(isValidEmail(email)==true){
+			$('.e_input_title_has_error').attr('class','eunder_input_txt');
+		}else if(email.length != 0){
+			$('.eunder_input_txt').attr('class','e_input_title_has_error');
+		}else{
+			$('.eunder_input_txt').attr('class','e_input_txt');
+		}
+		
+	});
+	
+	$('input[name=pwd]').focus(function(){
+		
+		var email = $('input[name=email]').val();
+		var pwd = $('input[name=pwd]').val();
+		
+		if(pwd.length == 0){
+			$('.p_input_txt').attr('class','punder_input_txt');
+		}else if(isValidPassword(pwd)==true){
+			$('.p_input_txt').attr('class','punder_input_txt');
+		}else{
+			$('.punder_input_txt').attr('class','p_input_txt_has_error');
+		}
+		
+	});
+
+	$('input[name=pwd]').blur(function(){
+		
+		var email = $('input[name=email]').val();
+		var pwd = $('input[name=pwd]').val();
+		
+		if(isValidPassword(pwd)==true){
+			$('.p_input_title_has_error').attr('class','punder_input_txt');
+		}else if(pwd.length != 0){
+			$('.punder_input_txt').attr('class','p_input_title_has_error');
+		}else{
+			$('.punder_input_txt').attr('class','p_input_txt');
+		}
+		
+	});
 	
 });
 
@@ -29,19 +100,18 @@ function checkEInput() {
 	
 	var email = $('input[name=email]').val();
 	var pwd = $('input[name=pwd]').val();
-	
+
 	if(!isValidEmail(email)) {
 		jQuery('.e_input_error').show();
 		$(".e_input_title").attr('class','e_input_title_has_error');
-		$(".e_input_txt").attr('class','e_input_txt_has_error');
+		$(".eunder_input_txt").attr('class','e_input_txt_has_error');
 		$(".e_input_error").attr('class','e_input_error_has_error');
 	} else{
 		$(".e_input_title_has_error").attr('class','e_input_title');
-		$(".e_input_txt_has_error").attr('class','e_input_txt');
+		$(".e_input_txt_has_error").attr('class','eunder_input_txt');
 		$(".e_input_error_has_error").attr('class','e_input_error');
 		jQuery('.e_input_error').hide();
 	}
-
 }
 
 function checkPInput() {
@@ -52,11 +122,11 @@ function checkPInput() {
 	if(!isValidPassword(pwd)) {
 		jQuery('.p_input_error').show();
 		$(".p_input_title").attr('class','p_input_title_has_error');
-		$(".p_input_txt").attr('class','p_input_txt_has_error');
+		$(".punder_input_txt").attr('class','p_input_txt_has_error');
 		$(".p_input_error").attr('class','p_input_error_has_error');
 	} else{
 		$(".p_input_title_has_error").attr('class','p_input_title');
-		$(".p_input_txt_has_error").attr('class','p_input_txt');
+		$(".p_input_txt_has_error").attr('class','punder_input_txt');
 		$(".p_input_error_has_error").attr('class','p_input_error');
 		jQuery('.p_input_error').hide();
 	}
@@ -99,11 +169,11 @@ function init(){
 	</div>
 	
 	<div class="login_btn_box">
-		<a href="#" type="button" onclick="document.getElementById('login_form').submit();" class="btn full solid">로그인</a>
-		<!-- <a disabled="disabled" href="" type="button" class="btn full solid disabled">로그인</a> -->
+		<a href="#" type="button" onclick="document.getElementById('login_form').submit();" class="btn_disabled">로그인</a>
 		<div id="naver_id_login" style="text-align:center">
-			<a href="${url}">
-				<img width="223" src="https://developers.naver.com/doc/review_201802/CK_bEFnWMeEBjXpQ5o8N_20180202_7aot50.png"/>
+			<a href="${url}" class="btn_naver">
+				<img src="/kreamy/resources/image/naver_logo.png" width="50px" height="48px" style="float: left; margin-right: -50px; padding-left: 2px; padding-top: 4px;">
+				네이버 로그인
 			</a>
 		</div>
 	</div>
