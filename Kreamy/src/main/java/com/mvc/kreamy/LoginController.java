@@ -114,5 +114,24 @@ public class LoginController {
 		
 		return "redirect:login";
 	}
+	
+	@RequestMapping(value="/join", method = {RequestMethod.GET, RequestMethod.POST })
+	public String signup() throws Exception{
+		
+		return "login/join";
+	}
 
+
+	@RequestMapping(value="/find_email", method = {RequestMethod.GET, RequestMethod.POST })
+	public String emailFind() throws Exception{
+		
+		return "login/find_email";
+	}
+	
+
+	@RequestMapping(value="/find_password", method = {RequestMethod.GET, RequestMethod.POST })
+	public String passwordFind() throws Exception{
+		
+		return "login/find_password";
+	}
 }
