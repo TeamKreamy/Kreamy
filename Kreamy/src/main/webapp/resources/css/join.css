@@ -4,6 +4,33 @@ body, button, input, select, table, textarea {
     font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
     color: #222;
 }
+body {
+    display: block;
+    margin: 8px;
+}
+input {
+    -webkit-writing-mode: horizontal-tb !important;
+    text-rendering: auto;
+    color: -internal-light-dark(black, white);
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    appearance: auto;
+    background-color: -internal-light-dark(rgb(255, 255, 255), rgb(59, 59, 59));
+    -webkit-rtl-ordering: logical;
+    cursor: text;
+    margin: 0em;
+    font: 400 13.3333px Arial;
+    padding: 1px 2px;
+    border-width: 2px;
+    border-style: inset;
+    border-color: -internal-light-dark(rgb(118, 118, 118), rgb(133, 133, 133));
+    border-image: initial;
+}
 
 button {
     padding: 0;
@@ -17,6 +44,36 @@ button {
     border-radius: 0;
 }
 
+div {
+    display: block;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+input, textarea {
+    padding: 0;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+}
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
 .join_area {
     margin: 0 auto;
     padding: 58px 0 160px;
@@ -47,7 +104,10 @@ button {
     display: inline-block;
     padding-right: 6px;
 }
-
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
 .input_title.ess:after {
     content: "*";
     position: absolute;
@@ -68,6 +128,9 @@ button {
     border-bottom: 1px solid #ebebeb;
 }
 
+.input_error {
+    display: none;
+}
 
 .btn {
     display: inline-block;
@@ -92,21 +155,7 @@ button {
   width: 24px;
   height: 24px;
   vertical-align: -0.05em;
+  color: #0F52BA;
 }
-
-.lnr-mustache {
-  /* color: #0F52BA; */
-  /* We can use "color" for setting the color
-  of the SVG because we set its "fill" to
-  "currentColor" */
-/*   font-size: 40px; */
-  /* We can use "font-size" for changing the size
-  of the SVG because its width and height were
-  set 1em.
-  To get crisp results, use sizes that are
-  a multiple of 20; because Linearicons was
-  designed on a 20 by 20 grid. */
-}
-
 
 

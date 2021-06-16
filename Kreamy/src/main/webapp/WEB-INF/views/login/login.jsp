@@ -149,7 +149,6 @@ function init(){
 <div class="login_area">
 
 	<h2 class="login_title">
-		::before
 	</h2>
 	
 	<div class="e_input_box">
@@ -172,7 +171,7 @@ function init(){
 		<a href="#" type="button" onclick="document.getElementById('login_form').submit();" class="btn_disabled">로그인</a>
 		<div id="naver_id_login" style="text-align:center">
 			<a href="${url}" class="btn_naver">
-				<img src="/kreamy/resources/image/naver_logo.png" width="50px" height="48px" style="float: left; margin-right: -50px; padding-left: 2px; padding-top: 4px;">
+				<img src="/kreamy/resources/image/etc/naver_logo.png" width="50px" height="48px" style="float: left; margin-right: -50px; padding-left: 2px; padding-top: 4px;">
 				네이버 로그인
 			</a>
 		</div>
