@@ -1,0 +1,112 @@
+@charset "UTF-8";
+
+body, button, input, select, table, textarea {
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+}
+
+button {
+    padding: 0;
+    border: 0;
+    outline: none;
+    background: none;
+    background-color: rgba(0,0,0,0);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0;
+}
+
+.join_area {
+    margin: 0 auto;
+    padding: 58px 0 160px;
+    width: 400px;
+}
+
+.join_title {
+    padding-bottom: 42px;
+    text-align: center;
+    font-size: 32px;
+    letter-spacing: -.48px;
+    color: #000;
+}
+
+.input_box {
+    position: relative;
+    padding: 10px 0 14px;
+}
+
+.input_title {
+    font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+}
+
+.input_title.ess {
+    position: relative;
+    display: inline-block;
+    padding-right: 6px;
+}
+
+.input_title.ess:after {
+    content: "*";
+    position: absolute;
+    top: -2px;
+    right: 0;
+}
+
+.input_item {
+    position: relative;
+}
+
+.input_txt {
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+
+.btn {
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #fff;
+}
+
+.btn_size_select {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.lnr {
+  display: inline-block;
+  fill: currentColor;
+  width: 24px;
+  height: 24px;
+  vertical-align: -0.05em;
+}
+
+.lnr-mustache {
+  /* color: #0F52BA; */
+  /* We can use "color" for setting the color
+  of the SVG because we set its "fill" to
+  "currentColor" */
+/*   font-size: 40px; */
+  /* We can use "font-size" for changing the size
+  of the SVG because its width and height were
+  set 1em.
+  To get crisp results, use sizes that are
+  a multiple of 20; because Linearicons was
+  designed on a 20 by 20 grid. */
+}
+
+
+
