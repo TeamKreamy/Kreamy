@@ -29,7 +29,7 @@ function isValidPassword(str){
 	var eng = pw.search(/[a-z]/ig);
 	var spe = pw.search(/[`~!@@#$%^&*|₩₩₩'₩";:₩/?]/gi);
 
-	if(pw.length < 8 || pw.length > 20){
+	if(pw.length < 8 || pw.length > 16){
 		return false;
 	}
 	

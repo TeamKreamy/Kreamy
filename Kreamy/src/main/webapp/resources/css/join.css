@@ -13,7 +13,7 @@ body, button, dd, div, dl, dt, fieldset, figcaption, figure, form, h1, h2, h3, h
     padding: 0;
 }
 
-body[class^=fixed_], div[class^=fixed_] {
+body[class^=fixed], div[class^=fixed] {
     overflow: hidden;
 }
 
@@ -116,37 +116,302 @@ input.text_fill:disabled {
     color: #000;
 }
 
-.input_box {
+
+.e_input_box {
     position: relative;
     padding: 10px 0 14px;
 }
+.e_input_item {
+    position: relative;
+}
+.p_input_box {
+    position: relative;
+    padding: 10px 0 14px;
+}
+.p_input_item {
+    position: relative;
+}
 
-.input_title {
+.e_input_title {
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
     font-size: 13px;
     letter-spacing: -.07px;
     line-height: 18px;
 }
 
-.input_title.ess {
+.e_input_title.ess {
     position: relative;
     display: inline-block;
     padding-right: 6px;
 }
-*, :after, :before {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-}
-.input_title.ess:after {
+
+.e_input_title.ess:after {
     content: "*";
     position: absolute;
     top: -2px;
     right: 0;
 }
 
+.e_input_txt {
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+    padding-right: 30px;
+    height: 38px;
+}
+
+.p_input_title {
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+}
+
+.p_input_txt {
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+    padding-right: 30px;
+    height: 38px;
+}
+.p_input_title.ess {
+    position: relative;
+    display: inline-block;
+    padding-right: 6px;
+}
+
+.p_input_title.ess:after {
+    content: "*";
+    position: absolute;
+    top: -2px;
+    right: 0;
+}
+
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 .input_item {
     position: relative;
 }
+.input_title {
+    font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+}
 
+/* 에러 발생시 */
+
+.e_input_title_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+    color: #f15746;
+}
+
+.e_input_txt_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+    border-bottom-color: #ef6253;
+    padding-right: 30px;
+    height: 38px;
+}
+
+.e_input_error_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: absolute;
+    line-height: 16px;
+    font-size: 11px;
+    color: #f15746;
+}
+.p_input_title_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+    color: #f15746;
+}
+
+.p_input_txt_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+    border-bottom-color: #ef6253;
+    padding-right: 30px;
+    height: 38px;
+}
+
+.p_input_error_has_error {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: absolute;
+    line-height: 16px;
+    font-size: 11px;
+    color: #f15746;
+}
+
+.eunder_input_txt {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 2px solid #ebebeb;
+    padding-right: 30px;
+    height: 38px;
+	border-bottom-color: black;
+}
+.punder_input_txt {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    box-sizing: border-box;
+    margin: 0;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 2px solid #ebebeb;
+    padding-right: 30px;
+    height: 38px;
+	border-bottom-color: black;
+}
+
+.join_area .input_txt {
+    padding-top: 9px;
+}
+.join_area .e_input_txt {
+    padding-top: 9px;
+}
+.join_area .p_input_txt {
+    padding-top: 9px;
+}
+
+.input_logistics_companies .input_txt, .input_txt.hover {
+    cursor: pointer;
+}
+.input_logistics_companies .e_input_txt, .e_input_txt.hover {
+    cursor: pointer;
+}
+.input_logistics_companies .p_input_txt, .p_input_txt.hover {
+    cursor: pointer;
+}
 .input_txt {
     padding: 8px 0;
     width: 100%;
@@ -156,16 +421,14 @@ input.text_fill:disabled {
     border-bottom: 1px solid #ebebeb;
 }
 
-.input_error {
-    display: none;
-}
-
-.join_area .input_txt {
-    padding-top: 9px;
-}
-
-.input_logistics_companies .input_txt, .input_txt.hover {
-    cursor: pointer;
+/* > 아이콘 */
+.lnr {
+  display: inline-block;
+  fill: currentColor;
+  width: 24px;
+  height: 24px;
+  vertical-align: -0.05em;
+  color: #0F52BA;
 }
 
 .btn {
@@ -185,33 +448,6 @@ input.text_fill:disabled {
     transform: translateY(-50%);
 }
 
-.lnr {
-  display: inline-block;
-  fill: currentColor;
-  width: 24px;
-  height: 24px;
-  vertical-align: -0.05em;
-  color: #0F52BA;
-}
-
-.full {
-    width: 100%;
-    font-size: 16px;
-    letter-spacing: -.16px;
-    font-weight: 700;
-    height: 52px;
-    line-height: 50px;
-    border-radius: 12px;
-}
-
-.btn {
-    display: inline-block;
-    cursor: pointer;
-    vertical-align: middle;
-    text-align: center;
-    background-color: #fff;
-}
-
 .solid {
     background-color: #222;
     color: #fff;
@@ -221,6 +457,55 @@ input.text_fill:disabled {
     background-color: #ebebeb;
     color: #fff;
     cursor: default;
+}
+
+
+
+
+/* 가입하기 버튼 */
+.btn_join_disabled {
+	-webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    text-decoration: none;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: -.16px;
+    font-weight: 700;
+    height: 52px;
+    line-height: 50px;
+    border-radius: 12px;
+    background-color: #ebebeb;
+    color: #fff;
+    cursor: default;
+    pointer-events: none;
+}
+
+.btn_join {
+    -webkit-text-size-adjust: none;
+    -webkit-font-smoothing: antialiased;
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: -.16px;
+    font-weight: 700;
+    height: 52px;
+    line-height: 50px;
+    border-radius: 12px;
+    background-color: #222;
+    color: #fff;
 }
 
 /* 이용약관 */
@@ -326,10 +611,21 @@ input.text_fill:disabled {
     color: rgba(34,34,34,.5);
 }
 
+.terms_box.open .check_sub {
+    display: block;
+}
+
 .terms_box+.terms_box {
     margin-top: 16px;
 }
 
+.check_sub {
+    display: none;
+    padding: 16px 0 0 36px;
+}
+.check_sub .checkbox_item+.checkbox_item {
+    margin-top: 12px;
+}
 /* 팝업창 */
 .layer {
     position: fixed;

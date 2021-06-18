@@ -1,0 +1,14 @@
+input[type=checkbox] {
+    display:none;
+}
+input[type=checkbox] + label { 
+    cursor: pointer; 
+    padding-left: 30px; 
+    background-repeat: no-repeat;
+    background-image: url('/kreamy/resources/image/etc/checkbox-gray.png');
+    background-size: 28px;
+}
+input[type=checkbox]:checked + label {
+    background-image: url('/kreamy/resources/image/etc/checkbox-black.png');
+    background-size: 28px;
+}
