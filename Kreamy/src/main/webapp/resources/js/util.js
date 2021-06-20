@@ -44,6 +44,17 @@ function isValidPassword(str){
 	return true;
 }
 
+//전화번호 검사
+function isValidPhone(str){
+
+	var format = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+	if(str.search(format) != -1)
+		return true;
+		
+	return false;
+}
+
 // 날짜 검사
 function isValidDate(year, month, day) {
 	var days = new Array (31, 0, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31);
