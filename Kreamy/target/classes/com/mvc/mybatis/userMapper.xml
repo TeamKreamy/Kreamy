@@ -32,5 +32,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	where ${searchKey} like '%' || #{searchValue} || '%'
 </select>
 
+<select id="findEmail" parameterType="String" resultType="String">
+	select email from userInfo where phone=#{phone}
+</select>
 
 </mapper>

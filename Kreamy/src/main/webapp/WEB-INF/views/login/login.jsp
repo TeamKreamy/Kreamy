@@ -9,7 +9,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>로그인</title>
+<title>KREAMY | 한정판 거래의 FLEX</title>
 <link data-n-head="ssr" rel="icon" type="image/x-icon" href="https://kream.co.kr/favicon.ico">
 <link rel="stylesheet" type="text/css" href="/kreamy/resources/css/login.css"/>
 

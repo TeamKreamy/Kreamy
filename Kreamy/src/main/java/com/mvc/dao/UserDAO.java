@@ -54,4 +54,11 @@ public class UserDAO {
 		return plists;
 	}
 	
+	public String findEmail(String phone) {
+		
+		String email = sessionTemplate.selectOne("com.userMapper.findEmail", phone);
+		
+		return email;
+	}
+	
 }

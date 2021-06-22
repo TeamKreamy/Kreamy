@@ -144,11 +144,37 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/find_email", method = { RequestMethod.GET, RequestMethod.POST })
-	public String emailFind() throws Exception {
+	public String emailFind(HttpServletRequest request) throws Exception {
+
+		List<String> plists = dao.getReadPhone();
+
+		request.setAttribute("plists", plists);
 
 		return "login/find_email";
 	}
 
+	@RequestMapping(value = "/find_email_ok", method = { RequestMethod.GET, RequestMethod.POST })
+	public String emailFindOk(String phone, HttpServletRequest request) throws Exception {
+
+		String email = dao.findEmail(phone);
+
+		int endIndex = email.indexOf("@");
+		
+		String idArea = email.substring(0,1);
+		String emailArea = email.substring(endIndex);
+		String masking = email.substring(1, endIndex);
+		
+		for(int i=0; i<masking.length(); i++) {
+			idArea += '*';
+		}
+		
+		email = idArea + emailArea;
+		
+		request.setAttribute("email", email);
+		
+		return "login/find_email_ok";
+	}
+	
 	@RequestMapping(value = "/find_password", method = { RequestMethod.GET, RequestMethod.POST })
 	public String passwordFind() throws Exception {
 

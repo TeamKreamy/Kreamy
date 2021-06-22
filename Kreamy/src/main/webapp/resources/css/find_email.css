@@ -1,0 +1,197 @@
+@charset "UTF-8";
+
+body, button, input, select, table, textarea {
+    font-family: -apple-system,BlinkMacSystemFont,Roboto,AppleSDGothicNeo-Regular,NanumBarunGothic,NanumGothic,"나눔고딕","Segoe UI",Helveica,Arial,Malgun Gothic,Dotum,sans-serif;
+    color: #222;
+}
+
+body, button, dd, div, dl, dt, fieldset, figcaption, figure, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, select, table, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}
+
+div {
+    display: block;
+}
+
+input, textarea {
+    padding: 0;
+    outline: 0;
+    border: 0;
+    resize: none;
+    border-radius: 0;
+    -webkit-appearance: none;
+    background-color: rgba(0,0,0,0);
+}
+
+a, a:active, a:focus, a:hover {
+    text-decoration: none;
+}
+
+a {
+    color: inherit;
+    -webkit-tap-highlight-color: rgba(0,0,0,.1);
+}
+
+dt {
+    display: block;
+}
+*, :after, :before {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.content {
+    margin: 0 auto;
+    padding: 0 40px;
+    max-width: 1280px;
+}
+
+.help_area {
+    margin: 0 auto;
+    padding: 60px 0 160px;
+    width: 400px;
+}
+
+.help_title {
+    padding-bottom: 41px;
+    text-align: center;
+    font-size: 32px;
+    letter-spacing: -.48px;
+    color: #000;
+    border-bottom: 2px solid #000;
+}
+
+.help_title.success {
+    padding-top: 40px;
+    font-size: 24px;
+    letter-spacing: -.36px;
+}
+
+.success_notice {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.success_notice .notice_title {
+    font-size: 12px;
+    letter-spacing: -.06px;
+    color: rgba(34,34,34,.5);
+}
+
+.success_notice .notice_txt {
+    padding-top: 8px;
+    font-size: 18px;
+    letter-spacing: -.09px;
+    font-weight: 700;
+}
+
+.success_btn_box {
+    padding-top: 56px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.success_btn_box .btn {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+    height: 52px;
+    line-height: 52px;
+    border-radius: 12px;
+}
+
+.success_btn_box .btn+.btn {
+    margin-left: 8px;
+}
+
+.outline {
+    border: 1px solid #222;
+}
+
+.large {
+    padding: 0 25px;
+    height: 52px;
+    line-height: 50px;
+    border-radius: 14px;
+    font-size: 16px;
+    letter-spacing: -.16px;
+}
+
+.success_btn_box .btn+.btn {
+    margin-left: 8px;
+}
+
+
+
+.help_notice {
+    padding: 40px 0 30px;
+}
+
+.help_notice .notice_txt {
+    font-size: 14px;
+    letter-spacing: -.21px;
+}
+
+.input_box {
+    position: relative;
+    padding: 10px 0 14px;
+}
+
+.input_title {
+    font-size: 13px;
+    letter-spacing: -.07px;
+    line-height: 18px;
+}
+
+.input_item {
+    position: relative;
+}
+
+.input_txt {
+    padding: 8px 0;
+    width: 100%;
+    font-size: 15px;
+    letter-spacing: -.15px;
+    line-height: 22px;
+    border-bottom: 1px solid #ebebeb;
+}
+
+.input_txt:focus {
+    padding-bottom: 7px;
+    border-bottom: 2px solid #333;
+}
+
+.help_btn_box {
+    padding-top: 44px;
+}
+.solid.disabled, .solid:disabled {
+    background-color: #ebebeb;
+    color: #fff;
+    cursor: default;
+}
+
+.full {
+    width: 100%;
+    font-size: 16px;
+    letter-spacing: -.16px;
+    font-weight: 700;
+    height: 52px;
+    line-height: 50px;
+    border-radius: 12px;
+}
+
+.btn {
+    display: inline-block;
+    cursor: pointer;
+    vertical-align: middle;
+    text-align: center;
+    background-color: #fff;
+}
+
+
+.solid {
+    background-color: #222;
+    color: #fff;
+}
