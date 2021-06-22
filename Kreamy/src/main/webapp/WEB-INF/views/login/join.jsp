@@ -209,10 +209,7 @@ $(function() {
 		$('.layer.lg.layer_privacy').attr('style','');
 	});
 	
-	$('#join_button').click(function(){
-		$('body').attr('class','fixed');
-		$('.layer.phone').attr('style','');
-	})
+
 	
 	// 팝업창 내 사이즈 클릭
 	$('.btn.outlinegrey.medium').click(function() {		
@@ -220,6 +217,7 @@ $(function() {
 		$('.btn.outlinegrey.medium.on').removeClass('on');
 		$(this).addClass('on');
 		$(".btn.solid.disabled.medium").attr('class','btn solid medium');
+		$("#join_submit").attr('class','btn solid disabled medium');
 	}); 
 	
 	//선택버튼 클릭
@@ -227,8 +225,8 @@ $(function() {
 		
 		$('body').attr('class','');
 		$('#size_container').attr('style','display: none;');
-		$('input[name=select_size]').attr('class', 'input_txt hover text_fill');
-		$('input[name=select_size]').val($('.btn.outlinegrey.medium.on').find('.info_txt').text());
+		$('input[name=shoesSize]').attr('class', 'input_txt hover text_fill');
+		$('input[name=shoesSize]').val($('.btn.outlinegrey.medium.on').find('.info_txt').text());
 		
 	});
 	
@@ -254,10 +252,35 @@ $(function() {
 		}else{
 			$(".btn_join").attr('class','btn_join_disabled');
 		}
+		
+		//광고성 정보수신
+		if($('#allow_marketing_sms').is(':checked')){
+			$('input[name=adSms]').val('yes');
+		}else{
+			$('input[name=adSms]').val('no');
+		}
+		
+		if($('#allow_marketing_email').is(':checked')){
+			$('input[name=adEmail]').val('yes');
+		}else{
+			$('input[name=adEmail]').val('no');
+		}
 	});
+	
+	//검은화면(+확인버튼)과 x클릭 
+	$('.btn_layer_close').click(function() {
+		
+		$('body').attr('class','');
+		$('#size_container').attr('style','display: none;');
+		$('.layer.lg.layer_agreement').attr('style','display:none;');
+		$('.layer.lg.layer_privacy').attr('style','display:none;');
+		$('.layer.phone').attr('style','display:none;');
+		
+	}); 
 	
 });
 
+//약관 전체 체크, 체크해제
 function cAll1(){
 	
 	if($("input:checkbox[id='group_check_1']").is(':checked')) {
@@ -362,6 +385,49 @@ function checkPhone(){
 	
 }
 
+function emailCheck(){
+	
+	var email = $('input[name=email]').val();
+	
+	$('.email_check .email_check_list').each(function (index, item) {
+		if(item.value==email){
+			alert("이미 가입된 아이디 입니다.");
+			document.getElementById('join_form').email.focus();
+			return;
+			
+		}else{
+			$('body').attr('class','fixed');
+			$('.layer.phone').attr('style','');
+		}
+	});	
+	
+	
+}
+
+function phoneCheck(){
+	
+	var phone = $('input[name=phone]').val();
+	var flag='no'
+	$('.phone_check .phone_check_list').each(function (index, item) {
+		if(item.value==phone){
+			alert("이미 가입된 전화번호 입니다.");
+			document.getElementById('join_form').phone.focus();
+			flag='yes'
+			return;
+		}
+		
+	});	
+	
+	if(flag=='no'){
+		if(!$('input[name=shoesSize]').val())
+			$('input[name=shoesSize]').val(0);
+		document.getElementById('join_form').submit();
+		
+	}
+	
+}
+
+//약관 펼치기 접기 이미지 변경
 function clickBtn1(){
 	
 	if($('#terms_box1').hasClass('open')){
@@ -397,7 +463,7 @@ function init(){
 <body onload="init();" class>
 
 
-<form id="join_form" method="post" action="<%=cp %>/login_ok">
+<form id="join_form" method="post" action="<%=cp %>/join_ok">
 
 <div class="join_area">
 	<h2 class="join_title">회원가입</h2>
@@ -427,7 +493,7 @@ function init(){
 			스니커즈 사이즈 (선택)
 		</h3>
 		<div class="input_item">
-			<input type="text" name="select_size" value placeholder="선택하세요" disabled="disabled" autocomplete="off" class="input_txt hover"/>
+			<input type="text" name="shoesSize" value placeholder="선택하세요" readonly="readonly" autocomplete="off" class="input_txt hover"/>
 			<button type="button" class="btn btn_size_select">
 				<img src="/kreamy/resources/image/etc/lnr-chevron-right.svg" width="15px" height="15px" style="float: right; padding-right: 2px;">
 			</button>
@@ -504,8 +570,15 @@ function init(){
 		</div>
 		
 	</div>
+	
+	<div class="email_check">
+		<c:forEach var="emails" items="${elists}">
+			<input type="hidden" class="email_check_list" value="${emails }">
 
-	<a href="#" type="button" id="join_button" class="btn_join_disabled"> 가입하기 </a>
+		</c:forEach>
+	</div>
+	
+	<a href="#" onclick="emailCheck();" type="button" id="join_button" class="btn_join_disabled"> 가입하기 </a>
 
 </div>
 
@@ -539,12 +612,22 @@ function init(){
 			</div>
 		</div>
 		
+		<input type="hidden" name="adSms" value>
+		<input type="hidden" name="adEmail" value>
+		
+		<div class="phone_check">
+			<c:forEach var="phones" items="${plists}">
+				<input type="hidden" class="phone_check_list" value="${phones }">
+	
+			</c:forEach>
+		</div>
+		
 		<div class="layer_btn">
-			<a href="#" type="button" id="join_submit" class="btn solid disabled medium"> 가입 </a>
+			<a href="#" type="button" onclick="phoneCheck();" id="join_submit" class="btn solid disabled medium"> 가입 </a>
 		</div>
 		
 		<a class="btn_layer_close">
-		
+			<svg style="width: 24px; height: 24px;" xmlns="http://www.w3.org/2000/svg" id="i-ico-close" fill="none" viewBox="0 0 24 24"><path fill="#222" fill-rule="evenodd" d="M11.293 12l-7.647 7.646.708.707L12 12.707l7.646 7.646.708-.707L12.707 12l7.647-7.646-.708-.708L12 11.293 4.354 3.646l-.708.708L11.293 12z" clip-rule="evenodd"></path></svg>
 		</a>
 		
 	</div>
@@ -670,7 +753,7 @@ function init(){
 		</div>
 		
 		<a class="btn_layer_close">
-		
+			<svg style="width: 24px; height: 24px;" xmlns="http://www.w3.org/2000/svg" id="i-ico-close" fill="none" viewBox="0 0 24 24"><path fill="#222" fill-rule="evenodd" d="M11.293 12l-7.647 7.646.708.707L12 12.707l7.646 7.646.708-.707L12.707 12l7.647-7.646-.708-.708L12 11.293 4.354 3.646l-.708.708L11.293 12z" clip-rule="evenodd"></path></svg>
 		</a>
 	</div>
 </div>
@@ -684,7 +767,7 @@ function init(){
 		<div class="layer_content">
 			<div class="agreement">
 				<div class="agreement_list">
-					<div class="agreement_title"> KREAM 서비스 이용 약관 </div>
+					<div class="agreement_title"> KREAMY 서비스 이용 약관 </div>
 					<div class="agreement_title">
 						<p>제 1 조 (목적)</p>
 					</div>
@@ -1023,7 +1106,7 @@ function init(){
 		</div>
 			
 		<a class="btn_layer_close">
-			<svg xmlns="http://www.w3.org/2000/svg" id="i-ico-close" fill="none" viewBox="0 0 24 24"><path fill="#222" fill-rule="evenodd" d="M11.293 12l-7.647 7.646.708.707L12 12.707l7.646 7.646.708-.707L12.707 12l7.647-7.646-.708-.708L12 11.293 4.354 3.646l-.708.708L11.293 12z" clip-rule="evenodd"></path></svg>
+			<svg style="width: 24px; height: 24px;" xmlns="http://www.w3.org/2000/svg" id="i-ico-close" fill="none" viewBox="0 0 24 24"><path fill="#222" fill-rule="evenodd" d="M11.293 12l-7.647 7.646.708.707L12 12.707l7.646 7.646.708-.707L12.707 12l7.647-7.646-.708-.708L12 11.293 4.354 3.646l-.708.708L11.293 12z" clip-rule="evenodd"></path></svg>
 		</a>
 	</div>
 </div>
@@ -1214,7 +1297,7 @@ function init(){
 		</div>
 		
 		<a class="btn_layer_close">
-			<svg xmlns="http://www.w3.org/2000/svg" class="ico-close icon sprite-icons"><use href="/_nuxt/91e1223d82ae15dcdada670ee3ffdaf6.svg#i-ico-close" xlink:href="/_nuxt/91e1223d82ae15dcdada670ee3ffdaf6.svg#i-ico-close"></use></svg>
+			<svg style="width: 24px; height: 24px;" xmlns="http://www.w3.org/2000/svg" id="i-ico-close" fill="none" viewBox="0 0 24 24"><path fill="#222" fill-rule="evenodd" d="M11.293 12l-7.647 7.646.708.707L12 12.707l7.646 7.646.708-.707L12.707 12l7.647-7.646-.708-.708L12 11.293 4.354 3.646l-.708.708L11.293 12z" clip-rule="evenodd"></path></svg>
 		</a>
 	</div>
 </div>

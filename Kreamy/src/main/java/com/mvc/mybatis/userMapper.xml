@@ -10,15 +10,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select nvl(max(userNum),0) from userInfo
 </select>
 
-
-<select id="getReadData" parameterType="map" resultType="com.mvc.dto.UserDTO">
+<select id="getReadData" resultType="com.mvc.dto.UserDTO">
 	select userNum,email,pwd from userInfo where email=#{email} and pwd=#{pwd}
 </select>
 
+<select id="getReadEmail" resultType="String">
+	select email from userInfo
+</select>
+
+<select id="getReadPhone" resultType="String">
+	select phone from userInfo
+</select>
 
 <insert id="insertData" parameterType="com.mvc.dto.UserDTO">
-	insert into board(num,name,pwd,email,subject,content,ipAddr,
-	hitCount,created) values (#{num},#{name},#{pwd},#{email},#{subject},#{content},#{ipAddr},0,sysdate)
+	insert into userInfo (userNum,email,pwd,id,phone,shoesSize,adSms,adEmail,created) 
+	values (#{userNum},#{email},#{pwd},#{id},#{phone},#{shoesSize},#{adSms},#{adEmail},sysdate)
 </insert>
 
 <select id="getDataCount" parameterType="map" resultType="int">

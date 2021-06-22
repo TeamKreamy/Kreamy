@@ -7,7 +7,7 @@ public class UserDTO {
 	private String pwd;
 	private String id;
 	private String phone;
-	private String shoesSize;
+	private int shoesSize;
 	
 	private String profileImage;
 	private String adSms;
@@ -48,10 +48,10 @@ public class UserDTO {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getShoesSize() {
+	public int getShoesSize() {
 		return shoesSize;
 	}
-	public void setShoesSize(String shoesSize) {
+	public void setShoesSize(int shoesSize) {
 		this.shoesSize = shoesSize;
 	}
 	public String getProfileImage() {

@@ -1,6 +1,7 @@
 package com.mvc.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -34,6 +35,23 @@ public class UserDAO {
 		return dto;
 	}
 	
-	
+	public void insertData(UserDTO dto) {
+		
+		sessionTemplate.insert("com.userMapper.insertData", dto);
+	}
 
+	public List<String> getReadEmail() {
+		
+		List<String> elists = sessionTemplate.selectList("com.userMapper.getReadEmail");
+		
+		return elists;
+	}
+	
+	public List<String> getReadPhone() {
+		
+		List<String> plists = sessionTemplate.selectList("com.userMapper.getReadPhone");
+		
+		return plists;
+	}
+	
 }
