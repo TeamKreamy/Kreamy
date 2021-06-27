@@ -29,7 +29,7 @@
 			</div>
 			
 			<div class="temporary_btn_box">
-				<a data-v-d33ccf72="" href="/login" class="btn nuxt-link-active solid large" type="button"> 로그인 </a>
+				<a href="<%=cp %>/login" class="btn nuxt-link-active solid large" type="button"> 로그인 </a>
 			</div>
 		</div>
 	</div>

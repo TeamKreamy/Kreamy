@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.mvc.dao.UserDAO;
 import com.mvc.dto.UserDTO;
+import com.mvc.util.GenerateCertPwd;
 
 @Controller("login.controller")
 public class LoginController {
@@ -26,6 +27,8 @@ public class LoginController {
 	/* NaverLoginBO */
 	private NaverLoginBO naverLoginBO;
 	private String apiResult = null;
+	
+	private boolean flag = false;
 
 	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
@@ -35,6 +38,9 @@ public class LoginController {
 	@Autowired
 	UserDAO dao;
 
+	@Autowired
+	GenerateCertPwd generateCertPwd;
+	
 	@RequestMapping(value = "/login", method = { RequestMethod.GET })
 	public String login(Model model, HttpSession session, HttpServletRequest request) throws Exception {
 
@@ -92,11 +98,22 @@ public class LoginController {
 		// response의 nickname값 파싱
 		String nickname = (String) response_obj.get("nickname");
 		System.out.println(nickname);
+		
+		String email = (String) response_obj.get("email");
+		System.out.println(email);
+		
+		UserDTO dto = dao.getEmail(email);
 
 		// 4.파싱 닉네임 세션으로 저장
 		session.setAttribute("sessionId", nickname); // 세션 생성
+		session.setAttribute("naverId", email);
 		model.addAttribute("result", apiResult);
-
+		
+		if(dto==null) {
+			flag = true;
+			return "login/join";
+		}
+		
 		return "login/login_ok";
 	}
 
@@ -111,14 +128,24 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = "/join", method = { RequestMethod.GET, RequestMethod.POST })
-	public String signup(HttpServletRequest request) throws Exception {
+	public String signup(HttpServletRequest request, HttpSession session) throws Exception {
 
+		System.out.println("hello");
+		System.out.println(flag);
 		
-		 List<String> elists = dao.getReadEmail();
-		 List<String> plists = dao.getReadPhone();
-
-		 request.setAttribute("elists", elists);
-		 request.setAttribute("plists", plists);
+		if(flag==true) {
+			String email = (String) session.getAttribute("naverId");
+			System.out.println(email);
+			request.setAttribute("email", email);
+		}
+		
+		List<String> elists = dao.getReadEmail();
+		List<String> plists = dao.getReadPhone();
+		
+		session.invalidate();
+		
+		request.setAttribute("elists", elists);
+		request.setAttribute("plists", plists);
 
 		return "login/join";
 	}
@@ -176,8 +203,37 @@ public class LoginController {
 	}
 	
 	@RequestMapping(value = "/find_password", method = { RequestMethod.GET, RequestMethod.POST })
-	public String passwordFind() throws Exception {
+	public String passwordFind(HttpServletRequest request) throws Exception {
 
+		List<String> plists = dao.getReadPhone();
+		List<String> elists = dao.getReadEmail();
+
+		request.setAttribute("plists", plists);
+		request.setAttribute("elists", elists);
+		
 		return "login/find_password";
 	}
+	
+	@RequestMapping(value = "/find_password_ok", method = { RequestMethod.GET, RequestMethod.POST })
+	public String passwordFindOk(String email) throws Exception {
+		
+		System.out.println(email);
+		String newPwd = "";
+		
+		while(true) {
+			newPwd = generateCertPwd.excuteGenerate();
+			if(newPwd!=null) {
+				break;
+			}
+		}
+			
+		System.out.println(newPwd);
+		dao.updatePwd(email, newPwd);
+		
+		//이메일로 보내는거 추가,,, 해보던가~!
+		
+		return "login/find_password_ok";
+	}
+	
+	
 }

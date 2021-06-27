@@ -79,13 +79,16 @@ $(function() {
 		var email = $('input[name=email]').val();
 		var pwd = $('input[name=pwd]').val();
 		
-		if(email.length == 0){
-			$('.e_input_txt').attr('class','eunder_input_txt');
-		}else if(isValidEmail(email)==true){
-			$('.e_input_txt').attr('class','eunder_input_txt');
-		}else{
-			$('.eunder_input_txt').attr('class','e_input_txt_has_error');
+		if(!"${naverId}"){
+			if(email.length == 0){
+				$('.e_input_txt').attr('class','eunder_input_txt');
+			}else if(isValidEmail(email)==true){
+				$('.e_input_txt').attr('class','eunder_input_txt');
+			}else{
+				$('.eunder_input_txt').attr('class','e_input_txt_has_error');
+			}
 		}
+		
 		
 	});
 
@@ -468,6 +471,7 @@ function init(){
 <div class="join_area">
 	<h2 class="join_title">회원가입</h2>
 	
+	<c:if test="${empty naverId }">
 	<div class="e_input_box">
 		<h3 class="e_input_title ess">
 			이메일 주소
@@ -477,6 +481,19 @@ function init(){
 		</div>
 		<p class="e_input_error"> 이메일 주소를 정확히 입력해주세요. </p>
 	</div>
+	</c:if>
+	
+	<c:if test="${!empty naverId }">
+	<div class="e_input_box">
+		<h3 class="e_input_title ess">
+			네이버로 연결됨
+		</h3>
+		<div class="e_input_item">
+			<input type="text" name="email" value="${naverId }" style="color: rgba(34,34,34,.5); cursor: default;" readonly="readonly" autocomplete="off" class="e_input_txt">
+		</div>
+		<p class="e_input_error"> 네이버>내정보>연락처 이메일로 가입됩니다. </p>
+	</div>
+	</c:if>
 	
 	<div class="p_input_box">
 		<h3 class="p_input_title ess">
@@ -605,7 +622,7 @@ function init(){
 						전화번호
 					</h3>
 					<div class="phone_input_item">
-						<input type="text" name="phone" placeholder="'-'없이 숫자만 입력" autocomplete="off" class="phone_input_txt"/>
+						<input type="text" name="phone" placeholder="'-'없이 숫자만 입력" autocomplete="off" class="phone_input_txt" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');"/>
 					</div>
 					
 				</div>

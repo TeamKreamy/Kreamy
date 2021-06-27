@@ -75,7 +75,7 @@ function phoneCheck(){
 			<div class="input_box">
 				<h3 class="input_title">휴대폰 번호</h3>
 				<div class="input_item">
-					<input type="text" name="phone" value placeholder="가입하신 휴대폰 번호" autocomplete="off" class="input_txt">
+					<input type="text" name="phone" value placeholder="가입하신 휴대폰 번호" autocomplete="off" class="input_txt" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 				</div>
 			</div>
 			

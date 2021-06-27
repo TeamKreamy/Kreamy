@@ -35,6 +35,13 @@ public class UserDAO {
 		return dto;
 	}
 	
+	public UserDTO getEmail(String email) {
+		
+		UserDTO dto = sessionTemplate.selectOne("com.userMapper.getEmail", email);
+		
+		return dto;
+	}
+	
 	public void insertData(UserDTO dto) {
 		
 		sessionTemplate.insert("com.userMapper.insertData", dto);
@@ -60,5 +67,15 @@ public class UserDAO {
 		
 		return email;
 	}
+	
+	public void updatePwd(String email, String newPwd) {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("email", email);
+		params.put("pwd", newPwd);
+		
+		sessionTemplate.update("com.userMapper.updatePwd", params);
+	}
+
 	
 }

@@ -46,6 +46,6 @@
 	</beans:bean>
 	
 	<beans:bean id="myUtil" class="com.mvc.util.MyUtil"/>
-	
+	<beans:bean id="generateCertPwd" class="com.mvc.util.GenerateCertPwd"/>
 	
 </beans:beans>

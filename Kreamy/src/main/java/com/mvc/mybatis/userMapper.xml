@@ -14,6 +14,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	select userNum,email,pwd from userInfo where email=#{email} and pwd=#{pwd}
 </select>
 
+<select id="getEmail" resultType="com.mvc.dto.UserDTO" parameterType="String">
+	select email from userInfo where email=#{email}
+</select>
+
 <select id="getReadEmail" resultType="String">
 	select email from userInfo
 </select>
@@ -35,5 +39,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <select id="findEmail" parameterType="String" resultType="String">
 	select email from userInfo where phone=#{phone}
 </select>
+
+<update id="updatePwd" parameterType="map">
+	update userInfo set pwd=#{pwd} where email=#{email}
+</update>
 
 </mapper>
