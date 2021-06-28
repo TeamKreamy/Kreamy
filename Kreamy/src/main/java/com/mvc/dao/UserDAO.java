@@ -23,7 +23,7 @@ public class UserDAO {
 		
 		return maxNum;
 	}
-	/*
+	
 	public UserDTO getReadData(String email, String pwd){
 		
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -34,7 +34,7 @@ public class UserDAO {
 		
 		return dto;
 	}
-	*/
+	
 	public UserDTO getEmail(String email) {
 		
 		UserDTO dto = sessionTemplate.selectOne("com.userMapper.getEmail", email);

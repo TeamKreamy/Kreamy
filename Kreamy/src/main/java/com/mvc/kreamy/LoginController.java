@@ -58,8 +58,6 @@ public class LoginController {
 
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 
-		//System.out.println("네이버:" + naverAuthUrl);
-
 		model.addAttribute("url", naverAuthUrl);
 
 		return "login/login";
@@ -68,74 +66,54 @@ public class LoginController {
 	@RequestMapping(value = "/login_ok", method = { RequestMethod.POST, RequestMethod.GET })
 	public String login_ok(UserDTO dto, String pwd, HttpServletRequest request,HttpSession session) throws Exception {
 
-		//dto = dao.getReadData(dto.getEmail(), dto.getPwd());
 		dto = dao.getEmail(dto.getEmail());
-		
-		System.out.println(dto.getPwd());
 		
 		if (dto == null || bcryptPasswordEncoder.matches(pwd, dto.getPwd())==false) {
 			return "redirect:login";
 		}
-		System.out.println(dto.getUserNum());
 		session.setAttribute("userNum", dto.getUserNum());
 		
-		return "login/login_ok";
+		return "redirect:myPage";
 	}
 
-	// 네이버 로그인 성공시 callback호출 메소드
 	@RequestMapping(value = "/callback", method = { RequestMethod.GET, RequestMethod.POST })
 	public String callback(Model model, @RequestParam String code, @RequestParam String state, HttpSession session)
 			throws Exception {
 
-		System.out.println("여기는 callback");
 		OAuth2AccessToken oauthToken;
 		oauthToken = naverLoginBO.getAccessToken(session, code, state);
 
-		// 1. 로그인 사용자 정보를 읽어온다.
-		apiResult = naverLoginBO.getUserProfile(oauthToken); // String형식의 json데이터
+		apiResult = naverLoginBO.getUserProfile(oauthToken); 
 
-		/*
-		 * apiResult json 구조 {"resultcode":"00", "message":"success",
-		 * "response":{"id":"33666449","nickname":"shinn****","age":"20-29","gender":"M"
-		 * ,"email":"sh@naver.com","name":"\uc2e0\ubc94\ud638"}}
-		 */
-
-		// 2. String형식인 apiResult를 json형태로 바꿈
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(apiResult);
 		JSONObject jsonObj = (JSONObject) obj;
 
-		// 3. 데이터 파싱
-		// Top레벨 단계 _response 파싱
 		JSONObject response_obj = (JSONObject) jsonObj.get("response");
 
-		// response의 nickname값 파싱
-		String nickname = (String) response_obj.get("nickname");
-		System.out.println(nickname);
-		
 		String email = (String) response_obj.get("email");
-		System.out.println(email);
 		
 		UserDTO dto = dao.getEmail(email);
 
-		// 4.파싱 닉네임 세션으로 저장
-		session.setAttribute("sessionId", nickname); // 세션 생성
 		session.setAttribute("naverId", email);
+		
 		model.addAttribute("result", apiResult);
 		
 		if(dto==null) {
 			flag = true;
 			return "login/join";
+		}else {
+			
+			session.setAttribute("userNum", dto.getUserNum());
+			return "redirect:myPage";
 		}
 		
-		return "login/login_ok";
 	}
 
 	// 로그아웃
 	@RequestMapping(value = "/logout", method = { RequestMethod.GET, RequestMethod.POST })
 	public String logout(HttpSession session) throws IOException {
 
-		System.out.println("여기는 logout");
 		session.invalidate();
 
 		return "redirect:login";
@@ -146,7 +124,7 @@ public class LoginController {
 		
 		if(flag==true) {
 			String email = (String) session.getAttribute("naverId");
-			System.out.println(email);
+
 			request.setAttribute("email", email);
 			flag = false;
 		}
@@ -161,7 +139,6 @@ public class LoginController {
 	@ResponseBody
 	public String emailChkPOST(String email) throws Exception{
 
-		System.out.println("이메일 중복검사");
 		int result = dao.checkEmail(email);
 		
 		if(result!=0) {
@@ -176,8 +153,13 @@ public class LoginController {
 	@RequestMapping(value = "/phoneChk", method = RequestMethod.POST)
 	@ResponseBody
 	public String phoneChkPOST(String phone) throws Exception{
-
-		System.out.println("전화번호 중복검사");
+		if(phone.length()==10) {
+			phone = phone.substring(0, 3) + "-" + phone.substring(3, 6) + "-" + phone.substring(6);
+		}
+		if(phone.length()==11) {
+			phone = phone.substring(0, 3) + "-" + phone.substring(3, 7) + "-" + phone.substring(7);
+		}
+		
 		int result = dao.checkPhone(phone);
 		
 		if(result!=0) {
@@ -188,21 +170,37 @@ public class LoginController {
 		
 	}
 	
+	//비밀번호 확인
+	@RequestMapping(value = "/pwdChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String pwdChkPost(String email, String pwd) throws Exception{
+		
+		UserDTO dto = dao.getReadData(email, bcryptPasswordEncoder.encode(pwd));
+		
+		if(dto==null) {
+			return "fail";
+		}else {
+			return "success";
+		}
+	}
+	
 	@RequestMapping(value = "/join_ok", method = { RequestMethod.GET, RequestMethod.POST })
 	public String signup_ok(UserDTO dto, HttpServletRequest request) throws Exception {
 
 		int maxNum = dao.getMaxNum();
-		String email = dto.getEmail();
-
-		int index = email.indexOf("@");
-		String id = email.substring(0, index);
-		
-		dto.setUserNum(maxNum + 1);
-		dto.setId(id);
 	
-		System.out.println("암호화 전 비번 : " + dto.getPwd());
+		String phone =dto.getPhone();
+		
+		if(phone.length()==10) {
+			phone = phone.substring(0, 3) + "-" + phone.substring(3, 6) + "-" + phone.substring(6);
+		}
+		if(phone.length()==11) {
+			phone = phone.substring(0, 3) + "-" + phone.substring(3, 7) + "-" + phone.substring(7);
+		}
+		dto.setPhone(phone);
+		dto.setUserNum(maxNum + 1);
+	
 		dto.setPwd(bcryptPasswordEncoder.encode(dto.getPwd()));
-		System.out.println("암호화 후 비번 : " + dto.getPwd());
 		
 		dao.insertData(dto);
 
@@ -246,7 +244,6 @@ public class LoginController {
 	@RequestMapping(value = "/find_password_ok", method = { RequestMethod.GET, RequestMethod.POST })
 	public String passwordFindOk(String email) throws Exception {
 		
-		System.out.println(email);
 		String newPwd = "";
 		
 		while(true) {

@@ -485,6 +485,7 @@ li, ol, ul {
     background-color: #ebebeb;
     color: #fff;
     cursor: default;
+    pointer-events: none;
 }
 
 

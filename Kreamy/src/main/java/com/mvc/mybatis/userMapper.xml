@@ -27,8 +27,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <insert id="insertData" parameterType="com.mvc.dto.UserDTO">
-	insert into userInfo (userNum,email,pwd,id,phone,shoesSize,adSms,adEmail,created) 
-	values (#{userNum},#{email},#{pwd},#{id},#{phone},#{shoesSize},#{adSms},#{adEmail},sysdate)
+	insert into userInfo (userNum,email,pwd,id,phone,shoesSize,adSms,adEmail,created,grade,profileImage) 
+	values (#{userNum},#{email},#{pwd},#{id},#{phone},#{shoesSize},#{adSms},#{adEmail},sysdate,'normal','blank_profile.png')
 </insert>
 
 <select id="getDataCount" parameterType="map" resultType="int">

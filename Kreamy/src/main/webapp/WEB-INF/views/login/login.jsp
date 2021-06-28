@@ -133,6 +133,58 @@ function checkPInput() {
 	
 }
 
+
+function emailCheck(){
+	
+	var email = $('input[name=email]').val();
+	
+	var data = {email : email}
+	
+	$.ajax({
+		type : "post",
+		url : "<%=cp%>/emailChk",
+		data : data,
+		success : function(result){
+			if(result=="success"){
+				alert("이메일 또는 비밀번호를 확인해주세요");
+				document.getElementById('login_form').email.value='';
+				document.getElementById('login_form').pwd.value='';
+				$('.eunder_input_txt').attr('class','e_input_txt');
+				document.getElementById('login_form').email.focus();
+				return;
+			}else{
+				pwdCheck();
+			}
+		}
+	});
+}
+
+function pwdCheck(){
+	
+	var email = $('input[name=email]').val();
+	var pwd = $('input[name=pwd]').val();
+	
+	var data = {email : email, pwd : pwd}
+	
+	$.ajax({
+		type : "post",
+		url : "<%=cp%>/pwdChk",
+		data : data,
+		success : function(result){
+			if(result=="success"){
+				alert("이메일 또는 비밀번호를 확인해주세요");
+				document.getElementById('login_form').email.value='';
+				document.getElementById('login_form').pwd.value='';
+				$('.punder_input_txt').attr('class','p_input_txt');
+				document.getElementById('login_form').email.focus();
+				return;
+			}else{
+				document.getElementById('login_form').submit();
+			}
+		}
+	});
+}
+
 function init(){
 	jQuery('.e_input_error').hide();
 	jQuery('.p_input_error').hide();
@@ -168,7 +220,7 @@ function init(){
 	</div>
 	
 	<div class="login_btn_box">
-		<a href="#" type="button" onclick="document.getElementById('login_form').submit();" class="btn_disabled">로그인</a>
+		<a href="#" type="button" onclick="emailCheck();" class="btn_disabled">로그인</a>
 		<div id="naver_id_login" style="text-align:center">
 			<a href="${url}" class="btn_naver">
 				<img src="/kreamy/resources/image/etc/naver_logo.png" width="50px" height="48px" style="float: left; margin-right: -50px; padding-left: 2px; padding-top: 4px;">

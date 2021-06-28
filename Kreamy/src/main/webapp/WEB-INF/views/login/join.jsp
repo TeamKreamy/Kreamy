@@ -52,10 +52,10 @@ $(function() {
 	// 이름, 핸드폰 번호 유효성 검사 후 최종 가입 버튼 활성화
 	$('.name_input_box').on('input', function(){
 		
-		var name = $('input[name=name]').val();
+		var name = $('input[name=id]').val();
 		var phone = $('input[name=phone]').val();
 		
-		if(isValidPhone(phone)==true && name.length>=2){
+		if(isValidPhone(phone) && name.length>=2){
 			$("#join_submit").attr('class','btn solid medium');
 		}else{
 			$("#join_submit").attr('class','btn solid disabled medium');
@@ -64,7 +64,7 @@ $(function() {
 	
 	$('.phone_input_box').on('input', function(){
 	
-		var name = $('input[name=name]').val();
+		var name = $('input[name=id]').val();
 		var phone = $('input[name=phone]').val();
 		
 		if(isValidPhone(phone)==true && name.length>=2){
@@ -136,9 +136,9 @@ $(function() {
 		
 	});
 
-	$('input[name=name]').focus(function(){
+	$('input[name=id]').focus(function(){
 		
-		var name = $('input[name=name]').val();
+		var name = $('input[name=id]').val();
 		
 		if(name.length == 0){
 			$('.name_input_txt').attr('class','name_under_input_txt');
@@ -150,9 +150,9 @@ $(function() {
 		
 	});
 
-	$('input[name=name]').blur(function(){
+	$('input[name=id]').blur(function(){
 
-		var name = $('input[name=name]').val();
+		var name = $('input[name=id]').val();
 		
 		if(name.length>=2){
 			$('.name_input_title_has_error').attr('class','name_under_input_txt');
@@ -354,7 +354,7 @@ function checkPInput() {
 
 function checkName(){
 	
-	var name = $('input[name=name]').val();
+	var name = $('input[name=id]').val();
 	
 	if(name.length<2){
 		jQuery('.name_input_error').show();
@@ -399,7 +399,7 @@ function emailCheck(){
 		data : data,
 		success : function(result){
 			if(result=="fail"){
-				alert("이미 가입된 아이디 입니다.");
+				alert("이미 가입된 이메일 입니다.");
 				document.getElementById('join_form').email.focus();
 				return;
 			}else{
@@ -442,10 +442,10 @@ function clickBtn1(){
 	
 	if($('#terms_box1').hasClass('open')){
 		$('#terms_box1').attr('class','terms_box');
-		document.getElementById("click1").src = "/kreamy/resources/image/etc/plus.svg";
+		document.getElementById("click1").src = "/img/plus.svg";
 	}else{
 		$('#terms_box1').attr('class','terms_box open');
-		document.getElementById("click1").src = "/kreamy/resources/image/etc/minus.svg";
+		document.getElementById("click1").src = "/img/minus.svg";
 	}
 }
 
@@ -453,10 +453,10 @@ function clickBtn2(){
 	
 	if($('#terms_box2').hasClass('open')){
 		$('#terms_box2').attr('class','terms_box');
-		document.getElementById("click2").src = "/kreamy/resources/image/etc/plus.svg";
+		document.getElementById("click2").src = "/img/plus.svg";
 	}else{
 		$('#terms_box2').attr('class','terms_box open');
-		document.getElementById("click2").src = "/kreamy/resources/image/etc/minus.svg";
+		document.getElementById("click2").src = "/img/minus.svg";
 	}
 	
 }
@@ -519,7 +519,7 @@ function init(){
 		<div class="input_item">
 			<input type="text" name="shoesSize" value placeholder="선택하세요" readonly="readonly" autocomplete="off" class="input_txt hover"/>
 			<button type="button" class="btn btn_size_select">
-				<img src="/kreamy/resources/image/etc/lnr-chevron-right.svg" width="15px" height="15px" style="float: right; padding-right: 2px;">
+				<img src="/img/lnr-chevron-right.svg" width="15px" height="15px" style="float: right; padding-right: 2px;">
 			</button>
 		</div>
 	</div>
@@ -534,7 +534,7 @@ function init(){
 					</label>
 				</div>
 				<button type="button" class="btn" onclick="clickBtn1();">
-					<img id="click1" src="/kreamy/resources/image/etc/plus.svg" width="28px" height="28px">
+					<img id="click1" src="/img/plus.svg" width="28px" height="28px">
 				
 				</button>
 			</div>
@@ -567,7 +567,7 @@ function init(){
 					</label>
 				</div>
 				<button type="button" class="btn" onclick="clickBtn2();">
-					<img id="click2" src="/kreamy/resources/image/etc/plus.svg" width="28px" height="28px">
+					<img id="click2" src="/img/plus.svg" width="28px" height="28px">
 				
 				</button>
 			</div>
@@ -612,7 +612,7 @@ function init(){
 						이름
 					</h3>
 					<div class="name_input_item">
-						<input type="text" name="name" placeholder="이름" autocomplete="off" class="name_input_txt">
+						<input type="text" name="id" placeholder="이름" autocomplete="off" class="name_input_txt">
 					</div>
 					<p class="name_input_error"> 이름 2-50자 </p>
 				</div>
