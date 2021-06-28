@@ -23,7 +23,7 @@ public class UserDAO {
 		
 		return maxNum;
 	}
-	
+	/*
 	public UserDTO getReadData(String email, String pwd){
 		
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -34,7 +34,7 @@ public class UserDAO {
 		
 		return dto;
 	}
-	
+	*/
 	public UserDTO getEmail(String email) {
 		
 		UserDTO dto = sessionTemplate.selectOne("com.userMapper.getEmail", email);
@@ -46,19 +46,19 @@ public class UserDAO {
 		
 		sessionTemplate.insert("com.userMapper.insertData", dto);
 	}
-
-	public List<String> getReadEmail() {
+	
+	public int checkEmail(String email) {
 		
-		List<String> elists = sessionTemplate.selectList("com.userMapper.getReadEmail");
+		int result = sessionTemplate.selectOne("com.userMapper.checkEmail", email);
 		
-		return elists;
+		return result;
 	}
 	
-	public List<String> getReadPhone() {
+	public int checkPhone(String phone) {
 		
-		List<String> plists = sessionTemplate.selectList("com.userMapper.getReadPhone");
+		int result = sessionTemplate.selectOne("com.userMapper.checkPhone", phone);
 		
-		return plists;
+		return result;
 	}
 	
 	public String findEmail(String phone) {

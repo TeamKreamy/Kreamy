@@ -89,7 +89,6 @@ $(function() {
 			}
 		}
 		
-		
 	});
 
 	$('input[name=email]').blur(function(){
@@ -392,41 +391,49 @@ function emailCheck(){
 	
 	var email = $('input[name=email]').val();
 	
-	$('.email_check .email_check_list').each(function (index, item) {
-		if(item.value==email){
-			alert("이미 가입된 아이디 입니다.");
-			document.getElementById('join_form').email.focus();
-			return;
-			
-		}else{
-			$('body').attr('class','fixed');
-			$('.layer.phone').attr('style','');
-		}
-	});	
+	var data = {email : email}
 	
+	$.ajax({
+		type : "post",
+		url : "<%=cp%>/emailChk",
+		data : data,
+		success : function(result){
+			if(result=="fail"){
+				alert("이미 가입된 아이디 입니다.");
+				document.getElementById('join_form').email.focus();
+				return;
+			}else{
+				$('body').attr('class','fixed');
+				$('.layer.phone').attr('style','');
+			}
+		}
+	});
 	
 }
 
 function phoneCheck(){
 	
 	var phone = $('input[name=phone]').val();
-	var flag='no'
-	$('.phone_check .phone_check_list').each(function (index, item) {
-		if(item.value==phone){
-			alert("이미 가입된 전화번호 입니다.");
-			document.getElementById('join_form').phone.focus();
-			flag='yes'
-			return;
-		}
-		
-	});	
+
+	var data = {phone : phone}
 	
-	if(flag=='no'){
-		if(!$('input[name=shoesSize]').val())
-			$('input[name=shoesSize]').val(0);
-		document.getElementById('join_form').submit();
-		
-	}
+	$.ajax({
+		type : "post",
+		url : "<%=cp%>/phoneChk",
+		data : data,
+		success : function(result){
+			if(result=="fail"){
+				alert("이미 가입된 전화번호 입니다.");
+				document.getElementById('join_form').phone.focus();
+				return;
+			}else{
+				if(!$('input[name=shoesSize]').val())
+					$('input[name=shoesSize]').val(0);
+				document.getElementById('join_form').submit();
+			}
+		}
+	});
+	
 	
 }
 
@@ -588,13 +595,6 @@ function init(){
 		
 	</div>
 	
-	<div class="email_check">
-		<c:forEach var="emails" items="${elists}">
-			<input type="hidden" class="email_check_list" value="${emails }">
-
-		</c:forEach>
-	</div>
-	
 	<a href="#" onclick="emailCheck();" type="button" id="join_button" class="btn_join_disabled"> 가입하기 </a>
 
 </div>
@@ -631,13 +631,6 @@ function init(){
 		
 		<input type="hidden" name="adSms" value>
 		<input type="hidden" name="adEmail" value>
-		
-		<div class="phone_check">
-			<c:forEach var="phones" items="${plists}">
-				<input type="hidden" class="phone_check_list" value="${phones }">
-	
-			</c:forEach>
-		</div>
 		
 		<div class="layer_btn">
 			<a href="#" type="button" onclick="phoneCheck();" id="join_submit" class="btn solid disabled medium"> 가입 </a>

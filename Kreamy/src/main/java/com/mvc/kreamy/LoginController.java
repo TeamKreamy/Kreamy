@@ -8,17 +8,20 @@ import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.github.scribejava.core.model.OAuth2AccessToken;
 import com.mvc.dao.UserDAO;
 import com.mvc.dto.UserDTO;
+import com.mvc.util.Email;
+import com.mvc.util.EmailSender;
 import com.mvc.util.GenerateCertPwd;
 
 @Controller("login.controller")
@@ -31,9 +34,18 @@ public class LoginController {
 	private boolean flag = false;
 
 	@Autowired
+	private EmailSender emailSender;
+	
+	@Autowired
+	private Email authEmail;
+	
+	@Autowired
 	private void setNaverLoginBO(NaverLoginBO naverLoginBO) {
 		this.naverLoginBO = naverLoginBO;
 	}
+	
+	@Autowired
+	private BCryptPasswordEncoder bcryptPasswordEncoder;
 
 	@Autowired
 	UserDAO dao;
@@ -44,27 +56,29 @@ public class LoginController {
 	@RequestMapping(value = "/login", method = { RequestMethod.GET })
 	public String login(Model model, HttpSession session, HttpServletRequest request) throws Exception {
 
-		/* 네이버아이디로 인증 URL을 생성하기 위하여 naverLoginBO클래스의 getAuthorizationUrl메소드 호출 */
 		String naverAuthUrl = naverLoginBO.getAuthorizationUrl(session);
 
-		// https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=sE***************&
-		// redirect_uri=http%3A%2F%2F211.63.89.90%3A8090%2Flogin_project%2Fcallback&state=e68c269c-5ba9-4c31-85da-54c16c658125
-		System.out.println("네이버:" + naverAuthUrl);
-		// 네이버
+		//System.out.println("네이버:" + naverAuthUrl);
+
 		model.addAttribute("url", naverAuthUrl);
 
 		return "login/login";
 	}
 
 	@RequestMapping(value = "/login_ok", method = { RequestMethod.POST, RequestMethod.GET })
-	public String login_ok(UserDTO dto, HttpServletRequest request) throws Exception {
+	public String login_ok(UserDTO dto, String pwd, HttpServletRequest request,HttpSession session) throws Exception {
 
-		dto = dao.getReadData(dto.getEmail(), dto.getPwd());
-
-		if (dto == null) {
+		//dto = dao.getReadData(dto.getEmail(), dto.getPwd());
+		dto = dao.getEmail(dto.getEmail());
+		
+		System.out.println(dto.getPwd());
+		
+		if (dto == null || bcryptPasswordEncoder.matches(pwd, dto.getPwd())==false) {
 			return "redirect:login";
 		}
-
+		System.out.println(dto.getUserNum());
+		session.setAttribute("userNum", dto.getUserNum());
+		
 		return "login/login_ok";
 	}
 
@@ -129,27 +143,51 @@ public class LoginController {
 
 	@RequestMapping(value = "/join", method = { RequestMethod.GET, RequestMethod.POST })
 	public String signup(HttpServletRequest request, HttpSession session) throws Exception {
-
-		System.out.println("hello");
-		System.out.println(flag);
 		
 		if(flag==true) {
 			String email = (String) session.getAttribute("naverId");
 			System.out.println(email);
 			request.setAttribute("email", email);
+			flag = false;
 		}
 		
-		List<String> elists = dao.getReadEmail();
-		List<String> plists = dao.getReadPhone();
-		
 		session.invalidate();
-		
-		request.setAttribute("elists", elists);
-		request.setAttribute("plists", plists);
 
 		return "login/join";
 	}
 
+	//이메일 중복검사
+	@RequestMapping(value = "/emailChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String emailChkPOST(String email) throws Exception{
+
+		System.out.println("이메일 중복검사");
+		int result = dao.checkEmail(email);
+		
+		if(result!=0) {
+			return "fail";
+		}else {
+			return "success";
+		}
+		
+	}
+	
+	//전화번호 중복검사
+	@RequestMapping(value = "/phoneChk", method = RequestMethod.POST)
+	@ResponseBody
+	public String phoneChkPOST(String phone) throws Exception{
+
+		System.out.println("전화번호 중복검사");
+		int result = dao.checkPhone(phone);
+		
+		if(result!=0) {
+			return "fail";
+		}else {
+			return "success";
+		}
+		
+	}
+	
 	@RequestMapping(value = "/join_ok", method = { RequestMethod.GET, RequestMethod.POST })
 	public String signup_ok(UserDTO dto, HttpServletRequest request) throws Exception {
 
@@ -158,13 +196,14 @@ public class LoginController {
 
 		int index = email.indexOf("@");
 		String id = email.substring(0, index);
-
-		System.out.println(dto.getShoesSize());
-
 		
 		dto.setUserNum(maxNum + 1);
 		dto.setId(id);
 	
+		System.out.println("암호화 전 비번 : " + dto.getPwd());
+		dto.setPwd(bcryptPasswordEncoder.encode(dto.getPwd()));
+		System.out.println("암호화 후 비번 : " + dto.getPwd());
+		
 		dao.insertData(dto);
 
 		return "redirect:login";
@@ -172,10 +211,6 @@ public class LoginController {
 
 	@RequestMapping(value = "/find_email", method = { RequestMethod.GET, RequestMethod.POST })
 	public String emailFind(HttpServletRequest request) throws Exception {
-
-		List<String> plists = dao.getReadPhone();
-
-		request.setAttribute("plists", plists);
 
 		return "login/find_email";
 	}
@@ -204,12 +239,6 @@ public class LoginController {
 	
 	@RequestMapping(value = "/find_password", method = { RequestMethod.GET, RequestMethod.POST })
 	public String passwordFind(HttpServletRequest request) throws Exception {
-
-		List<String> plists = dao.getReadPhone();
-		List<String> elists = dao.getReadEmail();
-
-		request.setAttribute("plists", plists);
-		request.setAttribute("elists", elists);
 		
 		return "login/find_password";
 	}
@@ -226,11 +255,15 @@ public class LoginController {
 				break;
 			}
 		}
-			
+
 		System.out.println(newPwd);
-		dao.updatePwd(email, newPwd);
+		dao.updatePwd(email, bcryptPasswordEncoder.encode(newPwd));
+	
+		authEmail.setSubject("Kreamy 임시 비밀번호입니다.");
+		authEmail.setContent("비밀번호는 " + newPwd + "입니다");
+		authEmail.setReceiver(email);
 		
-		//이메일로 보내는거 추가,,, 해보던가~!
+		emailSender.SendEmail(authEmail);
 		
 		return "login/find_password_ok";
 	}

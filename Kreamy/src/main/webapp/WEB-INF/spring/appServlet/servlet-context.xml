@@ -45,6 +45,25 @@
 		<beans:property name="password" value="a123"/>
 	</beans:bean>
 	
+			
+	<!-- gmail -->
+    <beans:bean id="mailSender" class ="org.springframework.mail.javamail.JavaMailSenderImpl" >
+        <beans:property name="host" value="smtp.gmail.com" />
+        <beans:property name="port" value="587" />
+        <beans:property name="defaultEncoding" value="utf-8"/>
+        <beans:property name="username" value="kreamy.mailserver@gmail.com" />
+        <beans:property name="password" value="kreamya123!" />
+       
+        <beans:property name="javaMailProperties">
+            <beans:props>
+                <beans:prop key="mail.smtp.starttls.enable">true</beans:prop>
+                <beans:prop key="mail.smtp.auth">true</beans:prop>
+            </beans:props>
+        </beans:property>
+    </beans:bean>
+    
+    <beans:bean id="email" class="com.mvc.util.Email"/>
+    <beans:bean id="emailSender" class="com.mvc.util.EmailSender"/>
 	<beans:bean id="myUtil" class="com.mvc.util.MyUtil"/>
 	<beans:bean id="generateCertPwd" class="com.mvc.util.GenerateCertPwd"/>
 	

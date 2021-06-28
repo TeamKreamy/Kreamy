@@ -15,15 +15,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <select id="getEmail" resultType="com.mvc.dto.UserDTO" parameterType="String">
-	select email from userInfo where email=#{email}
+	select userNum,email,pwd from userInfo where email=#{email}
 </select>
 
-<select id="getReadEmail" resultType="String">
-	select email from userInfo
+<select id="checkEmail" resultType="int" parameterType="String">
+	select count(*) from userInfo where email=#{email}
 </select>
 
-<select id="getReadPhone" resultType="String">
-	select phone from userInfo
+<select id="checkPhone" resultType="int" parameterType="String">
+	select count(*) from userInfo where phone=#{phone}
 </select>
 
 <insert id="insertData" parameterType="com.mvc.dto.UserDTO">

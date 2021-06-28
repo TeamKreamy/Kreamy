@@ -150,50 +150,51 @@ function checkPInput() {
 function phoneCheck(){
 	
 	var phone = $('input[name=phone]').val();
-	var flag='no';
 	
-	$('.phone_check .phone_check_list').each(function (index, item) {
-		if(item.value==phone){
-			flag='yes'
-			emailCheck();
+	var data = {phone : phone}
+	
+	$.ajax({
+		type : "post",
+		url : "<%=cp%>/phoneChk",
+		data : data,
+		success : function(result){
+			if(result=="success"){
+				alert("일치하는 사용자 정보를 찾을 수 없습니다.");
+				document.getElementById('find_password_form').phone.value='';
+				document.getElementById('find_password_form').email.value='';
+				$('.eunder_input_txt').attr('class','e_input_txt');
+				document.getElementById('find_password_form').phone.focus();
+				return;
+			}else{
+				emailCheck();
+			}
 		}
-		
-	});	
-	
-	if(flag=='no'){
-		alert("일치하는 사용자 정보를 찾을 수 없습니다.");
-		document.getElementById('find_password_form').phone.value='';
-		document.getElementById('find_password_form').email.value='';
-		$('.eunder_input_txt').attr('class','e_input_txt');
-		document.getElementById('find_password_form').phone.focus();
-		return;
-	}
-	
+	});
 }
 
 function emailCheck(){
 	
 	var email = $('input[name=email]').val();
-	var flag='no';
 	
-	$('.email_check .email_check_list').each(function (index, item) {
-		if(item.value==email){
-			flag='yes'
-			document.getElementById('find_password_form').submit();
-			
+	var data = {email : email}
+	
+	$.ajax({
+		type : "post",
+		url : "<%=cp%>/emailChk",
+		data : data,
+		success : function(result){
+			if(result=="success"){
+				alert("일치하는 사용자 정보를 찾을 수 없습니다.");
+				document.getElementById('find_password_form').phone.value='';
+				document.getElementById('find_password_form').email.value='';
+				$('.eunder_input_txt').attr('class','e_input_txt');
+				document.getElementById('find_password_form').phone.focus();
+				return;
+			}else{
+				document.getElementById('find_password_form').submit();
+			}
 		}
-		
-	});	
-	
-	if(flag=='no'){
-		alert("일치하는 사용자 정보를 찾을 수 없습니다.");
-		document.getElementById('find_password_form').phone.value='';
-		document.getElementById('find_password_form').email.value='';
-		$('.eunder_input_txt').attr('class','e_input_txt');
-		document.getElementById('find_password_form').phone.focus();
-		return;
-	}
-	
+	});
 }
 
 function init(){
@@ -233,20 +234,6 @@ function init(){
 				<p class="e_input_error">이메일 주소를 정확히 입력해주세요.</p>
 			</div>
 			
-			<div class="phone_check">
-				<c:forEach var="phones" items="${plists}">
-					<input type="hidden" class="phone_check_list" value="${phones }">
-		
-				</c:forEach>
-			</div>
-			
-						
-			<div class="email_check">
-				<c:forEach var="emails" items="${elists}">
-					<input type="hidden" class="email_check_list" value="${emails }">
-		
-				</c:forEach>
-			</div>
 			
 			<div class="help_btn_box">
 				<a id="find_pwd" onclick="phoneCheck();" href="#" type="button" class="btn full solid disabled"> 문자 발송하기 </a>

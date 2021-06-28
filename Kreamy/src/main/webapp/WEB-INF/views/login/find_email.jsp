@@ -35,23 +35,24 @@ $(function() {
 function phoneCheck(){
 	
 	var phone = $('input[name=phone]').val();
-	var flag='no';
+
+	var data = {phone : phone}
 	
-	$('.phone_check .phone_check_list').each(function (index, item) {
-		if(item.value==phone){
-			flag='yes'
-			document.getElementById('find_email_form').submit();
-			
+	$.ajax({
+		type : "post",
+		url : "<%=cp%>/phoneChk",
+		data : data,
+		success : function(result){
+			if(result=="success"){
+				alert("일치하는 사용자 정보를 찾을 수 없습니다.");
+				document.getElementById('find_email_form').phone.value='';
+				document.getElementById('find_email_form').phone.focus();
+				return;
+			}else{
+				document.getElementById('find_email_form').submit();
+			}
 		}
-		
-	});	
-	
-	if(flag=='no'){
-		alert("일치하는 사용자 정보를 찾을 수 없습니다.");
-		document.getElementById('find_email_form').phone.value='';
-		document.getElementById('find_email_form').phone.focus();
-		return;
-	}
+	});
 	
 }
 
@@ -77,13 +78,6 @@ function phoneCheck(){
 				<div class="input_item">
 					<input type="text" name="phone" value placeholder="가입하신 휴대폰 번호" autocomplete="off" class="input_txt" oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*)\./g, '$1');">
 				</div>
-			</div>
-			
-			<div class="phone_check">
-				<c:forEach var="phones" items="${plists}">
-					<input type="hidden" class="phone_check_list" value="${phones }">
-		
-				</c:forEach>
 			</div>
 			
 			<div class="help_btn_box">
