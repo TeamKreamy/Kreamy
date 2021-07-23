@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.userMapper">
+
+<select id="maxNum" resultType="int">
+	select nvl(max(userNum),0) from userInfo
+</select>
+
+<select id="getReadData" resultType="com.mvc.dto.UserDTO">
+	select userNum,email,pwd from userInfo where email=#{email} and pwd=#{pwd}
+</select>
+
+<select id="getEmail" resultType="com.mvc.dto.UserDTO" parameterType="String">
+	select userNum,email,pwd from userInfo where email=#{email}
+</select>
+
+<select id="checkEmail" resultType="int" parameterType="String">
+	select count(*) from userInfo where email=#{email}
+</select>
+
+<select id="checkPhone" resultType="int" parameterType="String">
+	select count(*) from userInfo where phone=#{phone}
+</select>
+
+<insert id="insertData" parameterType="com.mvc.dto.UserDTO">
+	insert into userInfo (userNum,email,pwd,id,phone,shoesSize,adSms,adEmail,created,grade,profileImage) 
+	values (#{userNum},#{email},#{pwd},#{id},#{phone},#{shoesSize},#{adSms},#{adEmail},sysdate,'normal','blank_profile.png')
+</insert>
+
+<select id="getDataCount" parameterType="map" resultType="int">
+	select nvl(count(*),0) from board
+	where ${searchKey} like '%' || #{searchValue} || '%'
+</select>
+
+<select id="findEmail" parameterType="String" resultType="String">
+	select email from userInfo where phone=#{phone}
+</select>
+
+<update id="updatePwd" parameterType="map">
+	update userInfo set pwd=#{pwd} where email=#{email}
+</update>
+
+</mapper>
